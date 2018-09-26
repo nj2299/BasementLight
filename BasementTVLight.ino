@@ -115,7 +115,7 @@ void setup_wifi() {
 void updateFirmware(){
   
  // t_httpUpdate_return ret = ESPhttpUpdate.update("http://99.231.14.167/update");
-    t_httpUpdate_return ret = ESPhttpUpdate.update("http://nj2299.duckdns.org/BasementTVLight");
+    t_httpUpdate_return ret = ESPhttpUpdate.update("http://nj2299.duckdns.org/BasementTVLightUpdate");
 
       Serial.println(ret);
         switch(ret) {
