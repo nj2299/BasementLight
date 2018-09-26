@@ -36,6 +36,7 @@ char topicChar[18];
 int segmultiplier = PixelCount/12;
 
 const char* topic_sub_roomupdate = "BasementTV/roomupdate";  //listen to this topic
+const char* topic_sub_Heartbeat = "BasementTV/Hearbeat"; 
 const char* topic_pub = "BasementTV/status";
 const char* topic_sub_firmware = "BasementTV/commands/firmware";  //listen for firmware update
 bool command = 0;           //is there a current meeting
@@ -439,6 +440,7 @@ void setup() {
   client.setCallback(callback);
   client.subscribe(topic_sub_roomupdate); 
   client.subscribe(topic_sub_firmware);
+  client.subscribe (topic_sub_Heartbeat);
   setup_lights();  
   startUDP();
   
