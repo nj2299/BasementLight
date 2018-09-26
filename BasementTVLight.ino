@@ -68,7 +68,7 @@ unsigned long prevActualTime = 0;
 /************************setup light strip*****************************************/
 // For Esp8266, the Pin is omitted and it uses GPIO3 due to DMA hardware use.  
 NeoPixelBus<NeoGrbFeature, NeoWs2813Method> strip(PixelCount);
-#define colorSaturation 128
+#define colorSaturation 255
 
 RgbColor red(colorSaturation, 0, 0);
 RgbColor green(0, colorSaturation, 0);
@@ -242,11 +242,13 @@ void callback(char* topic, byte* payload, unsigned int length2){
     Heartbeat = root["Heartbeat"];
     Firmware = root["Firmware"];
      
-    if (command != prevcommand){
+    if (Heartbeat !=1){
+      if (command != prevcommand){
       statechange = 1;
       prevcommand = command;
       Serial.println(command);
       Serial.println(statechange);
+    }
    }
 
      if (Heartbeat == 1){
