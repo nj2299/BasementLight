@@ -202,27 +202,12 @@ void setup_lights(){
   strip.Show(); // Initialize all pixels to 'off'
 }
 
-/************************send status***********************************/
-
-void send_status(){
-
-  
-    StaticJsonBuffer<300> JSONbuffer;
-    JsonObject& JSONencoder = JSONbuffer.createObject();
-    JSONencoder["ID"] = clientName;
-    char JSONmessageBuffer[300];
-    JSONencoder.printTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
-    client.publish(topic_pub, JSONmessageBuffer);
-    Serial.println(JSONmessageBuffer);
-}
-
-
 /*****************MQTT Listener******************************************************/
 void callback(char* topic, byte* payload, unsigned int length2){
   //topicString = WiFi.macAddress();
   Serial.print("Message arrived in topic: ");
   Serial.println(topic);
-
+  messageRecieved();
    
   Serial.print("Message: ");
   for(int i = 0; i<length2;i++){
@@ -262,6 +247,20 @@ void callback(char* topic, byte* payload, unsigned int length2){
     }
     
   }
+  
+}
+
+/***************message recieved******************************************************/
+//To universal Topic
+void messageRecieved(){
+  
+  StaticJsonBuffer<100> JSONbuffer;            //Creates JSON message
+  JsonObject& JSONencoder = JSONbuffer.createObject();
+  JSONencoder["id"] = clientName;
+  JSONencoder["message"] = "recieved";
+  char JSONmessageBuffer[100];
+  JSONencoder.printTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
+  client.publish(topic_pub, JSONmessageBuffer, false);
   
 }
 
