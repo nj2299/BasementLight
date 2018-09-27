@@ -207,7 +207,7 @@ void callback(char* topic, byte* payload, unsigned int length2){
   //topicString = WiFi.macAddress();
   Serial.print("Message arrived in topic: ");
   Serial.println(topic);
-  messageRecieved();
+ 
    
   Serial.print("Message: ");
   for(int i = 0; i<length2;i++){
@@ -245,7 +245,7 @@ void callback(char* topic, byte* payload, unsigned int length2){
       updateFirmware();
       Firmware = 0;
     }
-    
+    messageRecieved(); 
   }
   
 }
