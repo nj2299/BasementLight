@@ -416,7 +416,7 @@ void stall(uint16_t s){
   unsigned long currentMillis=0;
   unsigned long startTimer = millis();
   for (uint8_t i=0; i<=s; i++){
-     while(startTimer - currentMillis < 50){
+     while(startTimer - currentMillis < 200){
      currentMillis = millis();
      client.loop(); 
     }
