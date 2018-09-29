@@ -430,7 +430,7 @@ void clear_strip(){
     
   }
   delay(1);
-  strip.Show();
+  //strip.Show();
 }
 
 void full_on(){
@@ -438,7 +438,7 @@ void full_on(){
     strip.SetPixelColor(i,white);
   }
   delay(1);
-  strip.Show();
+ // strip.Show();
 }
 
 void half_on(){
@@ -489,6 +489,7 @@ void loop() {
     reconnect();
   }
   client.loop();
+  strip.Show();
 
   unsigned long currentMillis = millis();
 
