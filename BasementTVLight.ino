@@ -297,8 +297,8 @@ void sendStartupMessage(){
   void effect_control (){
    
     if (command==1 && statechange==1){
-     LightOutMiddle (white);
-     //full_on();
+     //LightOutMiddle (white);
+     full_on();
      //half_on();
       //colorWipe(white,50);
       Serial.println("lights on");
