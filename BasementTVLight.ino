@@ -23,7 +23,7 @@
 #include <Esp.h>
 /*************************Constants***************************/
 //#define PixelCount 74
-#define PixelCount 60
+#define PixelCount 58
 #define LED_PIN D2    //control pin from ESP
 #define TIMER_MS 5000
 #define MQTT_KEEPALIVE 120
