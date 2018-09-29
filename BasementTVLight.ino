@@ -22,8 +22,8 @@
 #include <WiFiConnect.h>
 #include <Esp.h>
 /*************************Constants***************************/
-//#define PixelCount 74
-#define PixelCount 58
+#define PixelCount 74
+//#define PixelCount 58
 #define LED_PIN D2    //control pin from ESP
 #define TIMER_MS 5000
 #define MQTT_KEEPALIVE 120
@@ -297,8 +297,8 @@ void sendStartupMessage(){
   void effect_control (){
    
     if (command==1 && statechange==1){
-     //LightOutMiddle (white);
-     full_on();
+     LightOutMiddle (white);
+     //full_on();
      //half_on();
       //colorWipe(white,50);
       Serial.println("lights on");
@@ -416,7 +416,7 @@ void stall(uint16_t s){
   unsigned long currentMillis=0;
   unsigned long startTimer = millis();
   for (uint8_t i=0; i<=s; i++){
-     while(startTimer - currentMillis < 200){
+     while(startTimer - currentMillis < 400){
      currentMillis = millis();
      client.loop(); 
     }
