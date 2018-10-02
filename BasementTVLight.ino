@@ -74,7 +74,7 @@ NeoPixelBus<NeoGrbFeature, NeoWs2813Method> strip(PixelCount);
 RgbColor red(colorSaturation, 0, 0);
 RgbColor green(0, colorSaturation, 0);
 RgbColor blue(0, 0, colorSaturation);
-RgbColor white(196,255,255);
+RgbColor white(255,255,128);
 RgbColor black(0);
 
 /****************setup wifi************************************/
@@ -297,8 +297,8 @@ void sendStartupMessage(){
   void effect_control (){
    
     if (command==1 && statechange==1){
-     LightOutMiddle (white);
-     //full_on();
+     //LightOutMiddle (white);
+     full_on();
      //half_on();
       //colorWipe(white,50);
       Serial.println("lights on");
