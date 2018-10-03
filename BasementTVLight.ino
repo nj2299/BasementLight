@@ -69,7 +69,7 @@ unsigned long prevActualTime = 0;
 /************************setup light strip*****************************************/
 // For Esp8266, the Pin is omitted and it uses GPIO3 due to DMA hardware use.  
 NeoPixelBus<NeoGrbFeature, NeoWs2813Method> strip(PixelCount);
-#define colorSaturation 196
+#define colorSaturation 255
 
 RgbColor red(colorSaturation, 0, 0);
 RgbColor green(0, colorSaturation, 0);
@@ -418,7 +418,7 @@ void stall(uint16_t s){
   unsigned long currentMillis=0;
   unsigned long startTimer = millis();
   for (uint8_t i=0; i<=s; i++){
-     while(startTimer - currentMillis < 400){
+     while(startTimer - currentMillis < 500){
      currentMillis = millis();
      client.loop(); 
     }
