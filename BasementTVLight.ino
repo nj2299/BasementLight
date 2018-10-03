@@ -69,12 +69,12 @@ unsigned long prevActualTime = 0;
 /************************setup light strip*****************************************/
 // For Esp8266, the Pin is omitted and it uses GPIO3 due to DMA hardware use.  
 NeoPixelBus<NeoGrbFeature, NeoWs2813Method> strip(PixelCount);
-#define colorSaturation 128
+#define colorSaturation 196
 
 RgbColor red(colorSaturation, 0, 0);
 RgbColor green(0, colorSaturation, 0);
 RgbColor blue(0, 0, colorSaturation);
-RgbColor white(128,128,64);
+RgbColor white(colorSaturation,colorSaturation,colorSaturation/2);
 RgbColor black(0);
 
 /****************setup wifi************************************/
@@ -303,6 +303,7 @@ void sendStartupMessage(){
       //colorWipe(white,50);
       Serial.println("lights on");
       statechange = 0;
+      digitalWrite(LED_BUILTIN, LOW);
       Serial.flush();
     }
 
@@ -311,6 +312,7 @@ void sendStartupMessage(){
       //LightOutMiddle (black);
       Serial.println("lights off");
       statechange = 0;
+      digitalWrite(LED_BUILTIN, HIGH);
       Serial.flush();
     }
 
