@@ -46,6 +46,7 @@ bool statechange = 1;
 bool Heartbeat = 0;
 bool Firmware =0;
 unsigned long connect_time;
+unsigned long heartbeat_reset;
 
 
 WiFiClient espClient;         //wifi client
@@ -69,7 +70,7 @@ unsigned long prevActualTime = 0;
 /************************setup light strip*****************************************/
 // For Esp8266, the Pin is omitted and it uses GPIO3 due to DMA hardware use.  
 NeoPixelBus<NeoGrbFeature, NeoWs2813Method> strip(PixelCount);
-#define colorSaturation 255
+#define colorSaturation 196
 
 RgbColor red(colorSaturation, 0, 0);
 RgbColor green(0, colorSaturation, 0);
@@ -253,6 +254,7 @@ void callback(char* topic, byte* payload, unsigned int length2){
      if (Heartbeat == 1){
       sendStartupMessage();
       Heartbeat = 0;
+      heartbeat_reset = millis();
      }
   
     if(Firmware == 1){
@@ -513,7 +515,13 @@ void loop() {
   } else if ((currentMillis - lastNTPResponse) > 3600000) {
     Serial.println("More than 1 hour since last NTP response. Rebooting.");
     Serial.flush();
-    ESP.reset();
+    ESP.restart();
+  }
+
+  if(currentMillis - heartbeat_reset > 900000){
+    Serial.println("three heartbeats missed");
+    Serial.flush();
+    ESP.restart();
   }
 
   actualTime = timeUNIX + (currentMillis - lastNTPResponse)/1000;
