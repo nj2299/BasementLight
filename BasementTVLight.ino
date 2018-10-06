@@ -22,7 +22,7 @@
 #include <WiFiConnect.h>
 #include <Esp.h>
 /*************************Constants***************************/
-#define PixelCount 71
+#define PixelCount 60
 //#define PixelCount 58
 #define LED_PIN D2    //control pin from ESP
 #define TIMER_MS 5000
@@ -70,7 +70,7 @@ unsigned long prevActualTime = 0;
 /************************setup light strip*****************************************/
 // For Esp8266, the Pin is omitted and it uses GPIO3 due to DMA hardware use.  
 NeoPixelBus<NeoGrbFeature, NeoWs2813Method> strip(PixelCount);
-#define colorSaturation 155
+#define colorSaturation 255
 
 RgbColor red(colorSaturation, 0, 0);
 RgbColor green(0, colorSaturation, 0);
