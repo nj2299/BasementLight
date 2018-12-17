@@ -22,7 +22,7 @@
 #include <WiFiConnect.h>
 #include <Esp.h>
 /*************************Constants***************************/
-#define PixelCount 60
+#define PixelCount 42
 //#define PixelCount 58
 #define LED_PIN D2    //control pin from ESP
 #define TIMER_MS 5000
@@ -69,14 +69,15 @@ unsigned long prevActualTime = 0;
 
 /************************setup light strip*****************************************/
 // For Esp8266, the Pin is omitted and it uses GPIO3 due to DMA hardware use.  
-NeoPixelBus<NeoGrbFeature, NeoWs2813Method> strip(PixelCount);
+//NeoPixelBus<NeoGrbFeature, NeoWs2813Method> strip(PixelCount); // 3 pixel LED strip (rgb)
+NeoPixelBus<NeoRgbwFeature, NeoWs2813Method> strip(PixelCount);  //rgbw pixel strip
 #define colorSaturation 255
 
-RgbColor red(colorSaturation, 0, 0);
-RgbColor green(0, colorSaturation, 0);
-RgbColor blue(0, 0, colorSaturation);
-RgbColor white(colorSaturation,colorSaturation,colorSaturation/2);
-RgbColor black(0);
+RgbwColor red(colorSaturation, 0, 0,0);
+RgbwColor green(0, colorSaturation, 0,0);
+RgbwColor blue(0, 0, colorSaturation,0);
+RgbwColor white(0,0,0,colorSaturation);
+RgbwColor black(0);
 
 /****************setup wifi************************************/
 void setup_wifi() {
@@ -359,7 +360,7 @@ void sendNTPpacket(IPAddress& address) {
 /************************LIGHT EFFECTS***********************************/
 
 // start in the middle and fill outwards
-void LightOutMiddle(RgbColor c) {
+void LightOutMiddle(RgbwColor c) {
   int LED = PixelCount/2;
   int LED2 = LED-1;
   if(LED%2==0){                       //checks if LEDS are even or odd
@@ -394,7 +395,7 @@ void LightOutMiddle(RgbColor c) {
 }
 
 // Fill the dots one after the other with a color
-void colorWipe(RgbColor c, uint8_t wait) {
+void colorWipe(RgbwColor c, uint8_t wait) {
   for(uint16_t i=0; i<PixelCount; i++) {
     strip.SetPixelColor(i, c);
     delay(1);
@@ -406,7 +407,7 @@ void colorWipe(RgbColor c, uint8_t wait) {
 //   clear_strip();
 }
 
-void colorWipeReverse (RgbColor c, uint8_t wait) {
+void colorWipeReverse (RgbwColor c, uint8_t wait) {
   for(uint16_t i= 0 ; i<PixelCount+1; i++) {
     strip.SetPixelColor(PixelCount-i,c);
     strip.Show();
@@ -420,7 +421,7 @@ void stall(uint16_t s){
   unsigned long currentMillis=0;
   unsigned long startTimer = millis();
   for (uint8_t i=0; i<=s; i++){
-     while(startTimer - currentMillis < 800){
+     while(startTimer - currentMillis < 810){
      currentMillis = millis();
      client.loop(); 
     }
