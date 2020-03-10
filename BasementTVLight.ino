@@ -125,7 +125,8 @@ void setup_wifi() {
 void updateFirmware(){
   
  // t_httpUpdate_return ret = ESPhttpUpdate.update("http://99.231.14.167/update");
-    t_httpUpdate_return ret = ESPhttpUpdate.update("http://nj2299.duckdns.org:1881/BasementTVLightUpdate");
+ //   t_httpUpdate_return ret = ESPhttpUpdate.update("http://nj2299.duckdns.org:1881/BasementTVLightUpdate");
+ t_httpUpdate_return ret = ESPhttpUpdate.update("http://nodered:J1g@l00@192.168.1.14:1880/endpoint/BasementTVLightUpdate");
 
       Serial.println(ret);
         switch(ret) {
@@ -155,7 +156,7 @@ void ConnectBroker(PubSubClient client, const char* clientName)
     {
         Serial.print("Connecting to MQTT: ");
         Serial.println(clientName);
-        if(client.connect(clientName))      //command to connect to MQTT broker with the unique client name
+        if(client.connect(clientName,"mqtt","J1g@l00"))      //command to connect to MQTT broker with the unique client name
         {
           Serial.println("Connected");
         }
