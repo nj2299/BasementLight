@@ -126,7 +126,7 @@ void updateFirmware(){
   
  // t_httpUpdate_return ret = ESPhttpUpdate.update("http://99.231.14.167/update");
  //   t_httpUpdate_return ret = ESPhttpUpdate.update("http://nj2299.duckdns.org:1881/BasementTVLightUpdate");
- t_httpUpdate_return ret = ESPhttpUpdate.update("http://nodered:J1g@l00@192.168.1.14:1880/endpoint/BasementTVLightUpdate");
+ t_httpUpdate_return ret = ESPhttpUpdate.update("http://nodered:J1Gal00@192.168.1.14:1880/endpoint/BasementTVLightUpdate");
 
       Serial.println(ret);
         switch(ret) {
