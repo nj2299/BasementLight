@@ -1,2 +1,2 @@
-const char* ssid = "CNN";
-const char* password = "Co!!eenandNei!";
+const char* ssid = "CNNIoT_DM";
+const char* password = "C0!!eenD2299";
